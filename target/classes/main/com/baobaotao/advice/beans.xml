@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="greetingBefore" class="main.com.baobaotao.advice.GreetingBeforeAdvice"/>
+    <bean id="greetingAfter" class="main.com.baobaotao.advice.GreetingAfterReturnAdvice"/>
+    <bean id="greetingAround" class="main.com.baobaotao.advice.GreetingInterceptor"/>
+    <bean id="target" class="main.com.baobaotao.advice.NaiveWaiter"/>
+    <bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:proxyTargetClass="true"
+          p:target-ref="target">
+        <property name="interceptorNames">
+            <list>
+                <idref bean="greetingBefore"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="serviceTarget" class="main.com.baobaotao.advice.ForumService"/>
+    <bean id="transaction" class="main.com.baobaotao.advice.TransactionManager"/>
+    <bean id="forumService" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:target-ref="serviceTarget"
+          p:proxyTargetClass="true"
+          p:interceptorNames="transaction"/>
+</beans>

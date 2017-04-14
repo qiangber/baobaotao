@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--默认proxy-target-class="false"，表示使用JDK动态代理织入增强，当为true时表示使用CGLib动态代理技术织入增强，-->
+    <!--不过即使为false，若目标类没有声明接口的话，Spring还是会自动使用CGLib动态代理-->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+
+    <bean id="waiter" class="main.com.baobaotao.aspectj.NaiveWaiter"/>
+    <bean class="main.com.baobaotao.aspectj.basic.EnableSellerAspect"/>
+    <!--<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>-->
+</beans>

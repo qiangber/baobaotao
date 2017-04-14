@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="car" class="main.com.baobaotao.reflect.Car"
+          init-method="myInit"
+          destroy-method="myDestroy"
+          scope="singleton"
+          p:brand="红旗CA72"
+          p:maxSpeed="200"
+    />
+
+    <bean id="car1" class="main.com.baobaotao.reflect.Car">
+        <property name="maxSpeed"><value>200</value></property>
+        <property name="brand"><value>红旗</value></property>
+        <property name="color"><value>黑色</value></property>
+    </bean>
+
+    <!--必要时需要通过参数类型和位置索引来确定对应关系-->
+    <bean id="car2" class="main.com.baobaotao.reflect.Car">
+        <constructor-arg index="0" type="java.lang.String" value="红旗"/>
+        <constructor-arg index="1" type="java.lang.String" value="red"/>
+        <constructor-arg index="2" type="int" value="300"/>
+    </bean>
+
+    <bean id="boss" class="main.com.baobaotao.attr.Boss">
+        <property name="favorites">
+            <list>
+                <value>看报</value>
+                <value>高尔夫</value>
+                <value>赛车</value>
+            </list>
+        </property>
+        <property name="car">
+            <ref bean="car2"/>
+        </property>
+    </bean>
+</beans>
