@@ -13,4 +13,8 @@ public class NaiveWaiter implements Waiter {
     public void serveTo(String name) {
         System.out.println("NaiveWaiter: serve to " + name);
     }
+
+    public void smileTo(String name, int times) {
+        System.out.println("simle to " + name + " for 2 times");
+    }
 }
